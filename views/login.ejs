@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login</title>
+	<link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body class="min-h-screen">
+	<%-include("partials/header.ejs") %>
+	<main class="grid w-full h-screen place-items-center">
+		<form action="/login" method="post" class="shadow-lg rounded-xl p-5 ring-1 ring-slate-400 min-w-[22rem]">
+      <%-include("partials/form-prompt.ejs") %>
+			<h1 class="text-4xl font-extrabold mb-1">Welcome, back</h1>
+			<h3 class="text-sm text-gray-500 mb-4">Login to start using node-starter</h3>
+			<div class="mb-4">
+				<label for="email" class="block mb-2">E-mail</label>
+				<input
+					type="email"
+					name="email"
+					id="email"
+					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+					class="peer valid:ring-slate-300 w-full p-3 w-200 focus:outline-none focus:valid:ring-blue-300 rounded ring-1 invalid:ring-red-500"
+					placeholder="user@example.com"
+					required
+				>
+				<p class="hidden text-sm text-red-500 peer-invalid:block mt-2">Please enter a valid E-mail.</p>
+			</div>
+			<div class="mb-4">
+				<label for="password" class="block mb-2">Password</label>
+				<input
+					type="password"
+					name="password"
+					id="password"
+					class="peer valid:ring-slate-300 w-full p-3 w-200 focus:outline-none focus:valid:ring-blue-300 rounded ring-1 invalid:ring-red-500"
+					placeholder="**********"
+					minlength="8"
+					required
+				>
+				<p class="hidden text-sm text-red-500 peer-invalid:block mt-2">Password should be atleast 8 characters long.</p>
+			</div>
+			<p class="text-sm text-gray-500">Do not already have an accound? <a href="/register" class="text-blue-600">Sign up</a></p>
+			<button class="bg-gray-700 px-4 py-2 text-white mt-3 rounded">Login</button>
+		</form>
+	</main>
+</body>
+
+</html>

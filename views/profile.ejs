@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>node-starter</title>
+	<link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+  <%-include("partials/header.ejs") %>
+  <% months = [
+    "jan",
+    "feb",
+    "mar",
+    "apr",
+    "may",
+    "jun",
+    "jul",
+    "aug",
+    "sep",
+    "oct",
+    "nov",
+    "dec"
+  ] %>
+  <% joinedAt = new Date(currentUser.createdAt) %>
+	<main class="grid w-full place-items-center pt-[5rem]">
+		<div class="flex items-center mt-5 gap-5">
+      <img
+        src="<%=utils.toDataUri(currentUser.profile) %>"
+        class="w-[4rem] h-[4rem] rounded-full"
+        alt="profile"
+      />
+			<div>
+        <p><%=currentUser.name %></p>
+        <p>@<%=currentUser.username %></p>
+        <p>Joined at
+          <%=joinedAt.getDate() %>
+          <%=months[joinedAt.getMonth()] %>
+          <%=joinedAt.getFullYear() %>
+        </p>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>

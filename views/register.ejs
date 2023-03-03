@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Sign up</title>
+	<link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body class="min-h-screen">
+  <% locals.page = "register" %>
+	<%-include("partials/header.ejs") %>
+	<main class="grid w-full h-screen place-items-center py-[5rem]">
+		<form action="/register" method="post" enctype="multipart/form-data" class="shadow-lg rounded-xl p-5 ring-1 ring-slate-400 min-w-[22rem] mx-10">
+      <%-include("partials/form-prompt.ejs") %>
+			<h1 class="text-4xl font-extrabold mb-1">Welcome</h1>
+			<h3 class="text-sm text-gray-500 mb-4">Sign up to start using node-starter</h3>
+			<div class="mb-4">
+				<label for="name" class="block mb-2">Name</label>
+				<input type="text" name="name" id="name" class="peer valid:ring-slate-300 w-full p-3 w-200 focus:outline-none focus:valid:ring-blue-300 rounded ring-1 invalid:ring-red-500" placeholder="John Doe" required pattern="[A-Za-z0-9 ]{2,32}" minlength="2">
+				<p class="text-sm text-red-500 hidden peer-invalid:block mt-2">Name should be atleast 2 characters long.</p>
+			</div>
+			<div class="mb-4">
+				<label for="username" class="block mb-2">Username</label>
+				<input type="text" name="username" id="username" class="peer valid:ring-slate-300 w-full p-3 w-200 focus:outline-none focus:valid:ring-blue-300 rounded ring-1 invalid:ring-red-500" placeholder="johndoe" pattern="[a-z0-9]{4,16}" required minlength="4">
+				<p class="hidden text-sm text-red-500 peer-invalid:block mt-2">Username should have a length between 4 and 16, and should not container any space, capital letter, or spaces.</p>
+			</div>
+			<div class="mb-4">
+				<label for="email" class="block mb-2">E-mail</label>
+				<input type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="peer valid:ring-slate-300 w-full p-3 w-200 focus:outline-none focus:valid:ring-blue-300 rounded ring-1 invalid:ring-red-500" placeholder="user@example.com" required>
+				<p class="hidden text-sm text-red-500 peer-invalid:block mt-2">Please enter a valid E-mail.</p>
+			</div>
+			<div class="mb-4">
+				<label for="password" class="block mb-2">Password</label>
+				<input type="password" name="password" id="password" class="peer valid:ring-slate-300 w-full p-3 w-200 focus:outline-none focus:valid:ring-blue-300 rounded ring-1 invalid:ring-red-500" placeholder="**********" minlength="8" required>
+				<p class="hidden text-sm text-red-500 peer-invalid:block mt-2">Password should be atleast 8 characters long.</p>
+			</div>
+			<div class="mb-4">
+				<label for="profile" class="block mb-2">Profile</label>
+				<input class="file:bg-gray-700 invalid:ring-red-500 rounded file:text-white file:p-3 ring-1 w-full ring-gray-700 file:border-none" id="profile" type="file" name="profile" required accept="image/png,image/jpeg,image/jpg,image/svg+xml,image/webp">
+				<p class="text-md mt-2 text-gray-500">png, jpeg, jpg, svg, webp</p>
+			</div>
+			<p class="text-sm text-gray-500">Already have an accound? <a href="/login" class="text-blue-600">Login</a></p>
+			<button class="bg-gray-700 px-4 py-2 text-white mt-3 rounded" type="submit">Sign up</button>
+		</form>
+	</main>
+</body>
+
+</html>
