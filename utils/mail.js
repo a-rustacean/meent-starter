@@ -60,7 +60,7 @@ function sendVerifyEmail(user, verifyEmailToken, cb) {
         },
         { views: "templates" }
       );
-      sendMail("mdaltaf345678@outlook.com", "verify email", html)
+      sendMail(user.email, "verify email", html)
         .then((info) => resolve(info))
         .catch((error) => {
           reject(error);

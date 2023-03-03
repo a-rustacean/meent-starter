@@ -1,6 +1,6 @@
 <nav class="w-full p-4 shadow-lg flex items-center justify-between bg-white fixed">
 	<a href="/" class="text-lg">Node starter</a>
-  <% if (!locals.user) { if ("register" == locals.page) { %>
+  <% if (!locals.authUser) { if ("register" == locals.page) { %>
 	<a href="/login" class="text-lg">Login</a>
   <% } else { %>
   <a href="/register" class="text-lg">Sign up</a>
