@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node .",
     "start": "NODE_ENV=production node .",
-    "format": "prettier --write \"./**/*.{js,json,cjs,mjs,css,html}\"",
+    "format": "prettier --write .",
     "build": "postcss public/css/tailwind.css -o public/css/index.css",
     "build:watch": "postcss public/css/tailwind.css -o public/css/index.css --watch"
   },
