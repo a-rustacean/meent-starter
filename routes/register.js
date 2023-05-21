@@ -11,8 +11,8 @@ const validImageMimeTypes = [
   "image/png",
   "image/jpeg",
   "image/svg+xml",
-  "image/webp"
-]
+  "image/webp",
+];
 
 router.get("/", (_, res) => res.render("register.ejs"));
 
@@ -60,18 +60,20 @@ router.post("/", upload.single("profile"), async (req, res) => {
     }
     const password = await argon.hash(body.password);
     const profile = await createImage(req.file.buffer);
-    const createdUser = (await users.create(
-      [
-        {
-          email: body.email,
-          username: body.username,
-          password,
-          name: body.name,
-          profile
-        },
-      ],
-      { session }
-    ))[0];
+    const createdUser = (
+      await users.create(
+        [
+          {
+            email: body.email,
+            username: body.username,
+            password,
+            name: body.name,
+            profile,
+          },
+        ],
+        { session }
+      )
+    )[0];
     if (!createdUser) {
       await session.abortTransaction();
       await session.endSession();

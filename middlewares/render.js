@@ -8,9 +8,9 @@ module.exports = (req, res, next) => {
       authUser: req.user,
       env: process.env,
       utils: {
-        toDataUri
-      }
+        toDataUri,
+      },
     });
-  }
+  };
   next();
-}
+};

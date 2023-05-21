@@ -1,20 +1,17 @@
 const sharp = require("sharp");
 
 /**
- * 
+ *
  * @param {Buffer} buffer the buffer of the image
  * @param {number} [width=100] width of the resized image
  * @returns {Promise<Buffer>} modified buffer formated to jpeg
  */
 function createImage(buffer, width = 100) {
-  return sharp(buffer)
-    .resize({ width })
-    .jpeg({ mozjpeg: true })
-    .toBuffer();
+  return sharp(buffer).resize({ width }).jpeg({ mozjpeg: true }).toBuffer();
 }
 
 /**
- * 
+ *
  * @param {Buffer} image the image documentt
  * @returns {string} dataUri
  */
@@ -25,5 +22,5 @@ function toDataUri(image) {
 
 module.exports = {
   createImage,
-  toDataUri
-}
+  toDataUri,
+};

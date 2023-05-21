@@ -3,7 +3,7 @@ const { readFileSync } = require("fs");
 const moduleAlias = require("module-alias");
 
 /**
- * 
+ *
  * @param {string} jsconfigPath path to the jsconfig.json file
  */
 function applyJsconfigAlias(jsconfigPath) {
@@ -16,11 +16,15 @@ function applyJsconfigAlias(jsconfigPath) {
     for (const key in paths) {
       if (Object.hasOwnProperty.call(paths, key)) {
         const path = paths[key];
-        const alias = __dirname.split("/").splice(0, __dirname.split("/").length - 1).join("/") + "/" + path[0];
+        const alias =
+          __dirname
+            .split("/")
+            .splice(0, __dirname.split("/").length - 1)
+            .join("/") +
+          "/" +
+          path[0];
         aliases[key] = alias;
-        process.stdout.write(
-          "Setting aliaas: " + key + " -> " + alias + "\n"
-        );
+        process.stdout.write("Setting aliaas: " + key + " -> " + alias + "\n");
       }
     }
     moduleAlias.addAliases(aliases);

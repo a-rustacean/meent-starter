@@ -26,9 +26,7 @@ function applyFsRouting(
   readdirSync(path.join(__dirname, "..", routeFolder), {
     withFileTypes: true,
   })
-    .sort((a) =>
-      a.name === getRootPrefix(config.prefixes) + ".js" ? 1 : -1
-    )
+    .sort((a) => (a.name === getRootPrefix(config.prefixes) + ".js" ? 1 : -1))
     .forEach((file) => {
       const route = file.name;
       const type = file[Object.getOwnPropertySymbols(file)[0]];
@@ -51,7 +49,14 @@ function applyFsRouting(
       process.stdout.write("Connecting route " + routeName + "\n");
       app.use(
         routeName,
-        require(__dirname.split("/").slice(0, __dirname.split("/").length - 1).join("/") + "/" + routeFolder + "/" + route)
+        require(__dirname
+          .split("/")
+          .slice(0, __dirname.split("/").length - 1)
+          .join("/") +
+          "/" +
+          routeFolder +
+          "/" +
+          route)
       );
     });
 }

@@ -3,10 +3,8 @@
  * @param {string} type method type
  * @param {{ allowUnverifiedEmail?: boolean }} [config={}] config
  */
-function ensureAuth(type, config={}) {
-  const {
-    allowUnverifiedEmail
-  } = config;
+function ensureAuth(type, config = {}) {
+  const { allowUnverifiedEmail } = config;
   return function (req, res, next) {
     if (!req.user && (!allowUnverifiedEmail || req.user.emailVerified)) {
       if (type === "get") {
