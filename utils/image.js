@@ -7,7 +7,7 @@ const sharp = require("sharp");
  * @returns {Promise<Buffer>} modified buffer formated to jpeg
  */
 function createImage(buffer, width = 100) {
-  sharp(buffer)
+  return sharp(buffer)
     .resize({ width })
     .jpeg({ mozjpeg: true })
     .toBuffer();
