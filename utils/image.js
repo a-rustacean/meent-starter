@@ -3,10 +3,10 @@ const sharp = require("sharp");
 /**
  *
  * @param {Buffer} buffer the buffer of the image
- * @param {number} [width=100] width of the resized image
+ * @param {number} [width=2000] width of the resized image
  * @returns {Promise<Buffer>} modified buffer formated to jpeg
  */
-function createImage(buffer, width = 100) {
+function createImage(buffer, width = 2000) {
   return sharp(buffer).resize({ width }).jpeg({ mozjpeg: true }).toBuffer();
 }
 
