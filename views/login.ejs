@@ -22,11 +22,11 @@
 					name="email"
 					id="email"
 					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-					class="peer valid:ring-slate-300 w-full p-3 w-200 focus:outline-none focus:valid:ring-blue-300 rounded ring-1 invalid:ring-red-500"
+					class="peer valid:ring-slate-300 w-full p-3 w-200 focus:outline-none focus:valid:ring-blue-300 rounded ring-1 [&:not(.is-empty)]:invalid:ring-red-500"
 					placeholder="user@example.com"
 					required
 				>
-				<p class="hidden text-sm text-red-500 peer-invalid:block mt-2">Please enter a valid E-mail.</p>
+				<p class="hidden text-sm text-red-500 peer-[:not(.is-empty)]:peer-invalid:block mt-2">Please enter a valid E-mail.</p>
 			</div>
 			<div class="mb-4">
 				<label for="password" class="block mb-2">Password</label>
@@ -34,17 +34,34 @@
 					type="password"
 					name="password"
 					id="password"
-					class="peer valid:ring-slate-300 w-full p-3 w-200 focus:outline-none focus:valid:ring-blue-300 rounded ring-1 invalid:ring-red-500"
+					class="peer valid:ring-slate-300 w-full p-3 w-200 focus:outline-none focus:valid:ring-blue-300 rounded ring-1 [&:not(.is-empty)]:invalid:ring-red-500"
 					placeholder="**********"
 					minlength="8"
 					required
 				>
-				<p class="hidden text-sm text-red-500 peer-invalid:block mt-2">Password should be atleast 8 characters long.</p>
+				<p class="hidden text-sm text-red-500 peer-[:not(.is-empty)]:peer-invalid:block mt-2">Password should be atleast 8 characters long.</p>
 			</div>
 			<p class="text-sm text-gray-500">Do not already have an accound? <a href="/register" class="text-blue-600">Sign up</a></p>
 			<button class="bg-gray-700 px-4 py-2 text-white mt-3 rounded">Login</button>
 		</form>
 	</main>
+  <script>
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach((input) => {
+      if (input.value.trim() == "") {
+        input.classList.add("is-empty");
+      } else {
+        input.classList.remove("is-empty");
+      }
+      input.addEventListener("input", (e) => {
+        if (e.target.value.trim() == "") {
+          input.classList.add("is-empty");
+        } else {
+          input.classList.remove("is-empty");
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
