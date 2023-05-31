@@ -3,8 +3,6 @@ const Joi = require("joi");
 const users = require("@models/users");
 const argon = require("argon2");
 const connection = require("@utils/database");
-const path = require("path");
-const config = require("@config");
 const upload = require("@utils/upload");
 const { createImage } = require("@utils/image");
 const validImageMimeTypes = [
@@ -30,11 +28,11 @@ router.post("/", upload.single("profile"), async (req, res) => {
     return res.status(409).redirect("/register");
   }
   if (!req.file) {
-    req.flash("error", "Invalid profile photo");
+    req.flash("error", "Invalid profile photo.");
     return res.status(409).redirect("/register");
   }
   if (!validImageMimeTypes.includes(req.file.mimetype)) {
-    req.flash("error", "Invalid profile photo");
+    req.flash("error", "Invalid profile photo.");
     return res.status(409).redirect("/register");
   }
   const session = await connection.startSession();
@@ -46,7 +44,7 @@ router.post("/", upload.single("profile"), async (req, res) => {
     if (userWithExistingEmail) {
       await session.abortTransaction();
       await session.endSession();
-      req.flash("error", "Email already exists");
+      req.flash("error", "Email already exists.");
       return res.status(409).redirect("/register");
     }
     const userWithExistingUsername = await users
@@ -55,7 +53,7 @@ router.post("/", upload.single("profile"), async (req, res) => {
     if (userWithExistingUsername) {
       await session.abortTransaction();
       await session.endSession();
-      req.flash("error", "Username already exists");
+      req.flash("error", "Username already exists.");
       return res.status(409).redirect("/register");
     }
     const password = await argon.hash(body.password);
@@ -77,14 +75,14 @@ router.post("/", upload.single("profile"), async (req, res) => {
     if (!createdUser) {
       await session.abortTransaction();
       await session.endSession();
-      req.flash("error", "Error creating user");
+      req.flash("error", "Error creating user.");
       return res.status(502).redirect("/register");
     }
     await session.commitTransaction();
     await session.endSession();
     req.logIn(createdUser, (error) => {
       if (error) {
-        req.flash("error", "Unable to login");
+        req.flash("error", "Unable to login.");
         res.status(200).redirect("/login");
       }
       return res.status(200).redirect("/");
@@ -92,8 +90,7 @@ router.post("/", upload.single("profile"), async (req, res) => {
   } catch (error) {
     await session.abortTransaction();
     await session.endSession();
-    console.log(error);
-    req.flash("error", "Error creating user");
+    req.flash("error", "Error creating user.");
     return res.status(403).redirect("/register");
   }
 });

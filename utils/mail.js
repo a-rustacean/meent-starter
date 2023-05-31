@@ -4,6 +4,9 @@ const render = require("./render");
 const users = require("../models/users");
 
 const transport = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
+  secure: process.env.EMAIL_SECURE,
   service: process.env.EMAIL_SERVICE,
   auth: {
     user: process.env.EMAIL_AUTH_USER,
@@ -60,7 +63,13 @@ function sendVerifyEmail(user, verifyEmailToken, cb) {
         },
         { views: "templates" }
       );
-      sendMail(user.email, "verify email", html)
+      sendMail(user.email, "Verify your email", html, undefined, [
+        {
+          filename: "logo.png",
+          path: process.env.APP_URL + "/logo.png",
+          cid: "logo",
+        },
+      ])
         .then((info) => resolve(info))
         .catch((error) => {
           reject(error);
@@ -70,4 +79,39 @@ function sendVerifyEmail(user, verifyEmailToken, cb) {
   );
 }
 
-module.exports = { sendMail, sendVerifyEmail };
+/**
+ *
+ * @param {users} user user
+ * @param {string} resetPasswordToken token
+ * @param {Function=} cb callback
+ * @returns {Promise<SMTPTransport.SentMessageInfo>}
+ */
+function sendResetPasswordEmail(user, resetPasswordToken, cb) {
+  return nodify(
+    new Promise(async (resolve, reject) => {
+      const html = await render(
+        "resetPassword",
+        {
+          user,
+          env: process.env,
+          resetPasswordToken,
+        },
+        { views: "templates" }
+      );
+      sendMail(user.email, "Reset your password", html, undefined, [
+        {
+          filename: "logo.png",
+          path: process.env.APP_URL + "/logo.png",
+          cid: "logo",
+        },
+      ])
+        .then((info) => resolve(info))
+        .catch((error) => {
+          reject(error);
+        });
+    }),
+    cb
+  );
+}
+
+module.exports = { sendMail, sendVerifyEmail, sendResetPasswordEmail };

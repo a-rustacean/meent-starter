@@ -1,10 +1,21 @@
-/** @typedef {{ success: boolean, error: { message: string } | undefined, result: any }} PostResult */
+/**
+ *
+ * @typedef {{ message: string }} PostError
+ */
+
+/**
+ *
+ * @template T
+ * @typedef {{ success: boolean, error?: PostError, data?: T, redirect?: string }} PostResult
+ * */
+
+import nodify from "./nodify.js";
 
 /**
  *
  * @param {string} uri the uri to redirect to
  */
-function redirect(uri) {
+export function redirect(uri) {
   const anchor = document.createElement("a");
   anchor.href = uri;
   anchor.click();
@@ -12,16 +23,30 @@ function redirect(uri) {
 
 /**
  *
+ * @template T, B
  * @param {string} uri the uri to send post request to
- * @returns {Promise<PostResult>}
+ * @param {B} body body of the request
+ * @returns {Promise<T>}
  */
-async function post(uri) {
-  const res = await fetch(uri).then((r) => r.json());
+async function _post(uri, body) {
+  /** @type {PostResult<T>} */
+  const res = await fetch(uri, {
+    method: "POST",
+    body,
+  }).then((r) => r.json());
   if (res.redirect) redirect(res.redirect);
-  return res;
+  if (res.error) throw res.error;
+  return res.data;
 }
 
-export default {
-  redirect,
-  post,
-};
+/**
+ *
+ * @template T, B
+ * @param {string} uri the uri to send post request to
+ * @param {B} body the body of the request
+ * @param {import("./nodify").callback<T, PostError>} cb callback
+ * @returns {Promise<T>}
+ */
+export function post(uri, body, cb) {
+  return nodify(_post(uri, body), cb);
+}

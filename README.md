@@ -1,5 +1,5 @@
-# node-starter
+# meent starter
 
 ## About
 
-A starter project for MEEN (mongodb, express, ejs, nodejs).
+A starter project for MEENT (mongodb, express, ejs, nodejs, tailwind css).

@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const { sendVerifyEmail } = require("@utils/mail");
 const router = require("express").Router();
 const nodify = require("@utils/nodify");
-const passport = require("passport");
 
 router.get("/:token", (req, res) => {
   let email = null;
@@ -27,9 +26,11 @@ router.get("/:token", (req, res) => {
       nodify(existingUser.save(), (savingError) => {
         if (savingError)
           return res.status(502).send("Error updaing records please try again");
-        return passport.authenticate(existingUser.createdWith, {
-          successRedirect: "/",
-        })(req, res, () => {});
+        if (!req.user)
+          return req.logIn(existingUser, () => {
+            res.redirect("/");
+          });
+        return res.redirect("/");
       });
     }
   );
@@ -59,10 +60,10 @@ router.post("/", (req, res) => {
       success: false,
       error: {
         message: `Please wait ${
-          process.env.VERIFY_EMAIL_TIMER === 1
+          process.env.VERIFY_EMAIL_TIMER == 1
             ? "1 minute"
             : process.env.VERIFY_EMAIL_TIMER + " minutes"
-        } before making another req`,
+        } before making another request`,
       },
     });
   }
@@ -75,7 +76,7 @@ router.post("/", (req, res) => {
       expiresIn: process.env.VERIFY_EMAIL_EXPIRATION + "m",
     }
   );
-  sendVerifyEmail(req.user, verifyEmailToken, (sendingError, emailInfo) => {
+  sendVerifyEmail(req.user, verifyEmailToken, (sendingError, _emailInfo) => {
     if (sendingError)
       return res.status(502).json({
         success: false,

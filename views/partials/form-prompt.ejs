@@ -1,5 +1,9 @@
 <% if (messages.error) { %>
-<p class="mb-4 p-3 w-full ring-1 rounded ring-red-500 bg-red-300 text-red-500">
+<p class="mb-4 p-3 w-full ring-1 rounded ring-red-500 bg-red-300 text-red-900">
   <%=messages.error %>
+</p>
+<% } else if (messages.success) { %>
+<p class="mb-4 p-3 w-full ring-1 rounded ring-green-500 bg-green-300 text-green-900">
+  <%=messages.success %>
 </p>
 <% } %>

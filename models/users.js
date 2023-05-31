@@ -38,13 +38,19 @@ const usersSchema = new Schema(
     lastVerifyEmailSentAt: {
       type: Date,
       required,
-      default: () => Date.now() - 1000 * 60,
+      default: () => Date.now() - 1000 * 60 * process.env.VERIFY_EMAIL_TIMER,
+    },
+    lastResetPasswordEmailSentAt: {
+      type: Date,
+      required,
+      default: () => Date.now() - 1000 * 60 * process.env.RESET_PASSWORD_TIMER,
     },
     emailVerified: {
       type: Boolean,
       required: true,
       default: false,
     },
+    lastResetPasswordToken: String,
   },
   { timestamps: true }
 );

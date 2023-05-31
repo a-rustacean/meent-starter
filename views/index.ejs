@@ -4,15 +4,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>node-starter</title>
+  <title>meent-starter</title>
   <link rel="stylesheet" href="/css/index.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body class="minh-screen">
   <%-include("partials/header.ejs") %>
-  <main class="grid w-full h-screen place-items-center">
-    <p>Get started by editing <code class="bg-slate-700 py-1.5 px-2 rounded text-white">views/index.ejs</code></p>
+  <main class="w-full h-screen relative">
+    <% if (locals.authUser && !authUser.emailVerified) { %>
+    <div id="verify-email-toast" class="p-1 ring-1 rounded ring-yellow-500 bg-yellow-300 text-yellow-900 flex gap-4 fixed top-20 items-center right-2">
+      <p class="ml-2">
+        Your email is not verified
+      </p>
+      <button id="verify-email" class="bg-blue-500 text-white p-3 rounded">
+        Send verification email
+      </button>
+    </div>
+    <% } %>
+    <div class="grid h-full w-full place-items-center z-0">
+      <p>Get started by editing <code class="bg-slate-700 py-1.5 px-2 rounded text-white">views/index.ejs</code></p>
+    </div>
   </main>
+  
+  <script type="module" src="/src/verifyEmail.js"></script>
 </body>
 
 </html>

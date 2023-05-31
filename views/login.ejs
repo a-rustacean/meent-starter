@@ -14,9 +14,9 @@
 		<form action="/login" method="post" class="shadow-lg rounded-xl p-5 ring-1 ring-slate-400 min-w-[22rem]">
       <%-include("partials/form-prompt.ejs") %>
 			<h1 class="text-4xl font-extrabold mb-1">Welcome, back</h1>
-			<h3 class="text-sm text-gray-500 mb-4">Login to start using node-starter</h3>
+			<h3 class="text-sm text-gray-500 mb-4">Login to start using meent-starter</h3>
 			<div class="mb-4">
-				<label for="email" class="block mb-2">E-mail</label>
+				<label for="email" class="block mb-2">Email</label>
 				<input
 					type="email"
 					name="email"
@@ -26,7 +26,7 @@
 					placeholder="user@example.com"
 					required
 				>
-				<p class="hidden text-sm text-red-500 peer-[:not(.is-empty)]:peer-invalid:block mt-2">Please enter a valid E-mail.</p>
+				<p class="hidden text-sm text-red-500 peer-[:not(.is-empty)]:peer-invalid:block mt-2">Please enter a valid Email.</p>
 			</div>
 			<div class="mb-4">
 				<label for="password" class="block mb-2">Password</label>
@@ -42,26 +42,11 @@
 				<p class="hidden text-sm text-red-500 peer-[:not(.is-empty)]:peer-invalid:block mt-2">Password should be atleast 8 characters long.</p>
 			</div>
 			<p class="text-sm text-gray-500">Do not already have an accound? <a href="/register" class="text-blue-600">Sign up</a></p>
+			<p class="text-sm text-gray-500">Forgot your password? <a href="/forgot-password" class="text-blue-600">reset it</a></p>
 			<button class="bg-gray-700 px-4 py-2 text-white mt-3 rounded">Login</button>
 		</form>
 	</main>
-  <script>
-    const inputs = document.querySelectorAll("input");
-    inputs.forEach((input) => {
-      if (input.value.trim() == "") {
-        input.classList.add("is-empty");
-      } else {
-        input.classList.remove("is-empty");
-      }
-      input.addEventListener("input", (e) => {
-        if (e.target.value.trim() == "") {
-          input.classList.add("is-empty");
-        } else {
-          input.classList.remove("is-empty");
-        }
-      });
-    });
-  </script>
+  <script src="/src/form.js"></script>
 </body>
 
 </html>
