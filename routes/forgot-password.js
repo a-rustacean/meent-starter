@@ -34,11 +34,14 @@ router.post("/", (req, res) => {
           process.env.RESET_PASSWORD_TIMER * 60000 >
         Date.now()
       ) {
-        req.flash("error", `Please wait ${
-              process.env.RESET_PASSWORD_TIMER == 1
-                ? "1 minute"
-                : process.env.RESET_PASSWORD_TIMER + " minutes"
-            } before making another request`);
+        req.flash(
+          "error",
+          `Please wait ${
+            process.env.RESET_PASSWORD_TIMER == 1
+              ? "1 minute"
+              : process.env.RESET_PASSWORD_TIMER + " minutes"
+          } before making another request`
+        );
         return res.redirect("/forgot-password");
       }
       const token = jwt.sign(

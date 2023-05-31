@@ -1,18 +1,14 @@
 <nav class="w-full p-4 shadow-lg flex items-center justify-between bg-white fixed z-50">
-	<a href="/" class="text-lg">Node starter</a>
+  <a href="/" class="text-lg">Node starter</a>
   <% if (!locals.authUser) { %>
   <% if (locals.showLoginButton) { %>
-	<a href="/login" class="text-lg">Login</a>
+  <a href="/login" class="text-lg">Login</a>
   <% } else { %>
   <a href="/register" class="text-lg">Sign up</a>
   <% } %>
   <% } else { %>
   <a href="/profile">
-    <img
-      class="w-10 h-10 rounded-full"
-      src="<%=utils.toDataUri(authUser.profile) %>"
-      alt="profile"
-    />
+    <img class="w-10 h-10 rounded-full" src="<%=utils.toDataUri(authUser.profile) %>" alt="profile" />
   </a>
   <% } %>
 </nav>

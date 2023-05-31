@@ -12,12 +12,7 @@
   <% locals.showLoginButton = true %>
   <%-include("partials/header.ejs") %>
   <main class="grid w-full h-screen place-items-center py-[5rem] mb-10">
-    <form
-      action="/register"
-      method="post"
-      enctype="multipart/form-data"
-      class="shadow-lg rounded-xl p-5 ring-1 ring-slate-400 min-w-[22rem] mx-10 max-w-[30rem]"
-    >
+    <form action="/register" method="post" enctype="multipart/form-data" class="shadow-lg rounded-xl p-5 ring-1 ring-slate-400 min-w-[22rem] mx-10 max-w-[30rem]">
       <%-include("partials/form-prompt.ejs") %>
       <h1 class="text-4xl font-extrabold mb-1">Welcome</h1>
       <h3 class="text-sm text-gray-500 mb-4">Sign up to start using meent-starter</h3>
