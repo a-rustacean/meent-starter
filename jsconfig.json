@@ -5,7 +5,7 @@
     "server.js",
     "routes/**/*",
     "models/**/*",
-    "middleware/**/*",
+    "middlewares/**/*",
     "utils/**/*"
   ],
   "exclude": ["node_modules"],
