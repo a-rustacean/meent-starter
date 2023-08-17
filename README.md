@@ -8,24 +8,24 @@ A starter project for MEENT (mongodb, express, ejs, nodejs, tailwind css).
 
 start development server:
 
-```console
-$ npm run dev
+```shell
+npm run dev
 ```
 
 run server in production:
 
-```console
-$ npm start
+```shell
+npm start
 ```
 
 build css:
 
-```console
-$ npm run build
+```shell
+npm run build
 ```
 
 build css on file change:
 
-```console
-$ npm run build:watch
+```shell
+npm run build:watch
 ```
