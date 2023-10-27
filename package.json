@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/sharp": "^0.31.1",
+    "@types/sharp": "^0.32.0",
     "argon2": "^0.31.1",
     "connect-mongodb-session": "^3.1.1",
     "cookie-parser": "^1.4.6",
