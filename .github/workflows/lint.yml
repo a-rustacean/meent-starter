@@ -5,7 +5,7 @@ on:
     branches:
       ["master"]
 
-  pull:
+  pull_request:
     branches:
       ["master"]
 
