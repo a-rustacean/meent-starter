@@ -1,0 +1,33 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      ["master"]
+
+  pull:
+    branches:
+      ["master"]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 20.9.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.9.0
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm i
+
+      - name: Check Formating
+        run: npx prettier . --check
+
+      - name: Linting
+        run: npx eslint .
