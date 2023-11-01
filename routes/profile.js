@@ -6,12 +6,11 @@ router.get("/", ensureAuth("get", { allowUnverifiedEmail: true }), (req, res) =>
   res.render("profile.ejs", { currentUser: req.user })
 );
 
-router.get("/:username", (req, res) => {
+router.get("/:username", async (req, res) => {
   const username = req.params.username;
-  users.findOne({ username }, (err, user) => {
-    if (err || !user) return res.notExists();
-    return res.render("profile.ejs", { currentUser: user, authUser: req.user });
-  });
+  const user = await users.findOne({ username });
+  if (!user) return res.notExists();
+  res.render("profile.ejs", { currentUser: user, authUser: req.user });
 });
 
 module.exports = router;

@@ -4,7 +4,7 @@ const { sendVerifyEmail } = require("@utils/mail");
 const router = require("express").Router();
 const nodify = require("@utils/nodify");
 
-router.get("/:token", (req, res) => {
+router.get("/:token", async (req, res) => {
   let email = null;
   try {
     email = jwt.verify(
@@ -13,27 +13,22 @@ router.get("/:token", (req, res) => {
     ).email;
   } catch {}
   if (!email) return res.status(409).send("Invalid or expired link");
-  users.findOne(
-    {
-      email,
-    },
-    (queryError, existingUser) => {
-      if (queryError || !existingUser)
-        return res.status(404).send("User not found");
-      if (existingUser.emailVerified)
-        return res.status(403).send("Email is already verified");
-      existingUser.emailVerified = true;
-      nodify(existingUser.save(), (savingError) => {
-        if (savingError)
-          return res.status(502).send("Error updaing records please try again");
-        if (!req.user)
-          return req.logIn(existingUser, () => {
-            res.redirect("/");
-          });
-        return res.redirect("/");
+  const existingUser = await users.findOne({
+    email,
+  });
+  if (!existingUser) return res.status(404).send("User not found");
+  if (existingUser.emailVerified)
+    return res.status(403).send("Email is already verified");
+  existingUser.emailVerified = true;
+  nodify(existingUser.save(), (savingError) => {
+    if (savingError)
+      return res.status(502).send("Error updaing records please try again");
+    if (!req.user)
+      return req.logIn(existingUser, () => {
+        res.redirect("/");
       });
-    }
-  );
+    return res.redirect("/");
+  });
 });
 
 router.post("/", (req, res) => {

@@ -7,14 +7,13 @@ passport.serializeUser((user, done) => {
   done(null, { user: user._id, password: user.password });
 });
 
-passport.deserializeUser((obj, done) => {
-  users.findOne({ _id: obj.user }, (queryError, user) => {
-    if (queryError) return done(queryError);
-    if (!user) return done(null, false);
-    const passwordMatch = user.password === obj.password;
-    if (!passwordMatch) return done(null, false);
-    return done(null, user);
-  });
+passport.deserializeUser(async (obj, done) => {
+  const user = await users.findOne({ _id: obj.user });
+  if (queryError) return done(queryError);
+  if (!user) return done(null, false);
+  const passwordMatch = user.password === obj.password;
+  if (!passwordMatch) return done(null, false);
+  done(null, user);
 });
 
 passport.use(
