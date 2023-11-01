@@ -14,7 +14,7 @@ const spinner = `<div role="status">
 <span class="sr-only">Loading...</span>
 </div>`;
 
-verifyEmailButton.addEventListener("click", (_) => {
+verifyEmailButton.addEventListener("click", () => {
   if (isLoading) return;
   const originalText = verifyEmailButton.textContent;
   verifyEmailButton.innerHTML = spinner;
