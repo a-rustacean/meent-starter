@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
   const user = await users.findOne({
     email: req.body.email,
   });
-  
+
   if (!user) {
     req.flash("error", "No user found with that email.");
     return res.redirect("/forgot-password");
@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
       expiresIn: process.env.RESET_PASSWORD_EMAIL_EXPIRATION + "m",
     }
   );
-  sendResetPasswordEmail(user, token, (sendingError, _emailInfo) => {
+  sendResetPasswordEmail(user, token, (sendingError) => {
     if (sendingError) {
       req.flash("error", "Error sending password reset email.");
       return res.redirect("/forgot-password");

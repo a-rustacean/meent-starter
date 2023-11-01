@@ -9,7 +9,6 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (obj, done) => {
   const user = await users.findOne({ _id: obj.user });
-  if (queryError) return done(queryError);
   if (!user) return done(null, false);
   const passwordMatch = user.password === obj.password;
   if (!passwordMatch) return done(null, false);

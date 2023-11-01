@@ -1,7 +1,6 @@
 const nodemailer = require("nodemailer");
 const nodify = require("./nodify");
 const render = require("./render");
-const users = require("../models/users");
 
 const transport = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
@@ -53,7 +52,7 @@ function sendMail(to, subject, html, cb, attachments = []) {
  */
 function sendVerifyEmail(user, verifyEmailToken, cb) {
   return nodify(
-    new Promise(async (resolve, reject) => {
+    (async () => {
       const html = await render(
         "verifyEmail",
         {
@@ -63,18 +62,14 @@ function sendVerifyEmail(user, verifyEmailToken, cb) {
         },
         { views: "templates" }
       );
-      sendMail(user.email, "Verify your email", html, undefined, [
+      return await sendMail(user.email, "Verify your email", html, undefined, [
         {
           filename: "logo.png",
           path: process.env.APP_URL + "/logo.png",
           cid: "logo",
         },
-      ])
-        .then((info) => resolve(info))
-        .catch((error) => {
-          reject(error);
-        });
-    }),
+      ]);
+    })(),
     cb
   );
 }
@@ -88,7 +83,7 @@ function sendVerifyEmail(user, verifyEmailToken, cb) {
  */
 function sendResetPasswordEmail(user, resetPasswordToken, cb) {
   return nodify(
-    new Promise(async (resolve, reject) => {
+    (async () => {
       const html = await render(
         "resetPassword",
         {
@@ -98,18 +93,20 @@ function sendResetPasswordEmail(user, resetPasswordToken, cb) {
         },
         { views: "templates" }
       );
-      sendMail(user.email, "Reset your password", html, undefined, [
-        {
-          filename: "logo.png",
-          path: process.env.APP_URL + "/logo.png",
-          cid: "logo",
-        },
-      ])
-        .then((info) => resolve(info))
-        .catch((error) => {
-          reject(error);
-        });
-    }),
+      return await sendMail(
+        user.email,
+        "Reset your password",
+        html,
+        undefined,
+        [
+          {
+            filename: "logo.png",
+            path: process.env.APP_URL + "/logo.png",
+            cid: "logo",
+          },
+        ]
+      );
+    })(),
     cb
   );
 }

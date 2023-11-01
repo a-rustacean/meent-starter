@@ -49,14 +49,16 @@ function applyFsRouting(
       process.stdout.write("Connecting route " + routeName + "\n");
       app.use(
         routeName,
-        require(__dirname
-          .split("/")
-          .slice(0, __dirname.split("/").length - 1)
-          .join("/") +
-          "/" +
-          routeFolder +
-          "/" +
-          route)
+        require(
+          __dirname
+            .split("/")
+            .slice(0, __dirname.split("/").length - 1)
+            .join("/") +
+            "/" +
+            routeFolder +
+            "/" +
+            route
+        )
       );
     });
 }

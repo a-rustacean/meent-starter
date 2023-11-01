@@ -11,7 +11,9 @@ router.get("/:token", async (req, res) => {
       req.params.token,
       process.env.JWT_VERIFY_EMAIL_TOKEN
     ).email;
-  } catch {}
+  } catch {
+    /* do nothing */
+  }
   if (!email) return res.status(409).send("Invalid or expired link");
   const existingUser = await users.findOne({
     email,
@@ -71,7 +73,7 @@ router.post("/", (req, res) => {
       expiresIn: process.env.VERIFY_EMAIL_EXPIRATION + "m",
     }
   );
-  sendVerifyEmail(req.user, verifyEmailToken, (sendingError, _emailInfo) => {
+  sendVerifyEmail(req.user, verifyEmailToken, (sendingError) => {
     if (sendingError)
       return res.status(502).json({
         success: false,

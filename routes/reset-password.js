@@ -12,7 +12,9 @@ router.get("/:token", async (req, res) => {
       req.params.token,
       process.env.JWT_RESET_PASSWORD_EMAIL_TOKEN
     ).email;
-  } catch {}
+  } catch {
+    /* do nothing */
+  }
   if (!email) return res.status(409).send("Invalid or expired link");
   const existingUser = await users.findOne({
     email,
@@ -30,7 +32,9 @@ router.post("/:token", async (req, res) => {
       req.params.token,
       process.env.JWT_RESET_PASSWORD_EMAIL_TOKEN
     ).email;
-  } catch {}
+  } catch {
+    /* do nothing */
+  }
   if (!email) {
     req.flash("error", "Invalid or expired token");
     return res.redirect("/reset-password/" + req.params.token);
@@ -69,7 +73,7 @@ router.post("/:token", async (req, res) => {
         req.flash("error", "Unable to update password");
         return res.redirect("/reset-password/" + req.params.token);
       }
-      return req.logIn(existingUser, (_) => {
+      return req.logIn(existingUser, () => {
         return res.redirect("/");
       });
     });
