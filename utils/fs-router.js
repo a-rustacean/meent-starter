@@ -40,8 +40,8 @@ function applyFsRouting(
         return;
       }
       const name = path.parse(route).name;
-      const extention = path.extname(route);
-      if (extention !== ".js") return;
+      const extension = path.extname(route);
+      if (extension !== ".js") return;
       const routeName = path.join(
         prefix,
         (config?.prefixes && config.prefixes[name]) || name

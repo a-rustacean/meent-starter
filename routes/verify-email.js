@@ -24,7 +24,7 @@ router.get("/:token", async (req, res) => {
   existingUser.emailVerified = true;
   nodify(existingUser.save(), (savingError) => {
     if (savingError)
-      return res.status(502).send("Error updaing records please try again");
+      return res.status(502).send("Error updating records please try again");
     if (!req.user)
       return req.logIn(existingUser, () => {
         res.redirect("/");
