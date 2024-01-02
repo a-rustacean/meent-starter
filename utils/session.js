@@ -17,7 +17,7 @@ module.exports = require("express-session")({
     maxAge: 1000 * 60 * 60 * 24 * 365,
     domain: process.env.COOKIE_DOMAIN,
     httpOnly: true,
-    secure: false,
+    secure: process.env.NODE_ENV != "development",
   },
   store,
   resave: true,
