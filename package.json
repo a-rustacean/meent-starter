@@ -13,7 +13,7 @@
     "install-husky": "husky install"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dilshad <dilshadplayingminecraft@outlook.com>",
   "license": "MIT",
   "husky": {
     "hooks": {
