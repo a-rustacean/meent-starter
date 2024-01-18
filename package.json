@@ -52,7 +52,7 @@
     "sharp": "^0.33.2"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
+    "autoprefixer": "^10.4.17",
     "cssnano": "^6.0.3",
     "eslint": "^8.56.0",
     "husky": "^8.0.3",
