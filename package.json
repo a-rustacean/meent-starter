@@ -55,7 +55,7 @@
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "eslint": "^9.15.0",
-    "husky": "^9.1.6",
+    "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "postcss-cli": "^11.0.0",
     "prettier": "^3.3.3",
