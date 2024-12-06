@@ -37,7 +37,7 @@
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "express-flash": "^0.0.2",
     "express-log-url": "^1.6.0",
     "express-session": "^1.18.1",
