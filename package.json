@@ -59,6 +59,6 @@
     "lint-staged": "^16.1.0",
     "postcss-cli": "^11.0.1",
     "prettier": "^3.5.3",
-    "tailwindcss": "^4.1.8"
+    "tailwindcss": "^4.1.10"
   }
 }
