@@ -35,7 +35,7 @@
     "argon2": "^0.43.1",
     "connect-mongodb-session": "^5.0.0",
     "cookie-parser": "^1.4.7",
-    "dotenv": "^17.2.0",
+    "dotenv": "^17.2.1",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-flash": "^0.0.2",
